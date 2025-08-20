@@ -1,5 +1,10 @@
-import feedparser, datetime
+import feedparser, datetime, os
+from openai import OpenAI
 
+# OpenAI client başlat
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Haber kaynakları
 RSS_FEEDS = [
     "https://www.beyazperde.com/rss/diziler-haberleri.xml",
     "https://www.aa.com.tr/tr/teyithatti/rss/news?cat=kultur-sanat",
@@ -23,9 +28,23 @@ def get_news():
             items.append({"title": entry.title, "link": entry.link})
     return items[:20]
 
+def write_blog(news_items):
+    headlines = "\n".join([f"- {n['title']} ({n['link']})" for n in news_items])
+    prompt = f"""
+    Aşağıdaki haber başlıklarını kullanarak Actingo için SEO uyumlu,
+    1 haftalık blog yazısı hazırla (800-1000 kelime). 
+    Giriş, gelişme ve sonuç bölümleri olsun.
+    Başlıklar:
+    {headlines}
+    """
+    resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return resp.choices[0].message.content
+
 if __name__ == "__main__":
     news = get_news()
+    blog_text = write_blog(news[:7])  # 7 haber seç
     with open("weekly_blog.md", "w", encoding="utf-8") as f:
-        f.write("# Bu Haftanın Haberleri\n\n")
-        for n in news[:7]:
-            f.write(f"- {n['title']} ({n['link']})\n")
+        f.write(blog_text)
