@@ -1,7 +1,7 @@
 name: Weekly Blog
 
 permissions:
-  contents: write   # push izni ver
+  contents: write   # repo'ya push izni
 
 on:
   workflow_dispatch:   # sadece manuel çalıştırma
@@ -20,10 +20,12 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: pip install feedparser
+      run: pip install feedparser openai
 
     - name: Run script
       run: python agent.py
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     - name: Commit blog post
       run: |
