@@ -26,12 +26,12 @@ CATEGORIES = {
         "https://www.marketingturkiye.com.tr/feed/"
     ],
     "ai": [
-        "https://www.webrazzi.com/feed/",
-        "https://www.techinside.com/feed/",
-        "https://btchaber.com/feed/",
-        "https://medium.com/feed/tag/yapay-zeka",
-        "https://www.donanimhaber.com/rss/tum/",
-        "https://www.webtekno.com/rss"
+    "https://openai.com/blog/rss",
+    "https://stability.ai/blog/rss",
+    "https://research.runwayml.com/feed.xml",
+    "https://huggingface.co/blog/feed.xml",
+    "https://ai.googleblog.com/feeds/posts/default?alt=rss",
+    "https://www.webrazzi.com/feed/"  # Türkiye için tek kalsın
     ],
     "muzik": [
         "https://www.aa.com.tr/tr/rss/kultur-sanat",
@@ -62,12 +62,10 @@ def write_blog(news_items, category):
     prompt = f"""
 Aşağıdaki {category} haber başlıklarını değerlendir. 
 
-- Sadece **yapay zeka yazılımları, modelleri, şirket yenilikleri ve sektörel gelişmeler** hakkında olanları seç. 
-- Telefon, bilgisayar, araba veya son kullanıcı cihaz haberlerini dahil etme. 
-
-Seçtiğin haberleri özgün bir şekilde tek tek aktar, 
-her biri klasik haber diliyle (giriş-gelişme-sonuç olmadan) 1-2 paragraf halinde yazılsın. 
-Başlıkların sırasını koru. 
+- Sadece **yapay zekânın sanat, görsel, video, ses, oyunculuk, müzik, içerik üretimindeki uygulamaları** hakkında olanları seç. 
+- Donanım, cihaz, telefon, araba vb. tüketici ürünlerini içeren haberleri dahil etme. 
+- Seçilen her haberi haber diliyle 1-2 paragraf halinde yaz. 
+- Eğer haberde demo linki veya YouTube linki varsa, onu mutlaka koru ve yazıya ekle. 
 
 Her haberin sonunda kaynağı şu formatta belirt:
 (kaynak: link)
