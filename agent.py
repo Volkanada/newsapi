@@ -55,13 +55,21 @@ def get_news(feeds):
 
 def write_blog(news_items, category):
     headlines = "\n".join([f"- {n['title']} ({n['link']})" for n in news_items])
-    prompt = f"""
-    Aşağıdaki {category} haber başlıklarını kullanarak Actingo için
-    SEO uyumlu günlük blog yazısı hazırla (600-800 kelime).
-    Giriş, gelişme ve sonuç bölümleri olsun.
-    Başlıklar:
-    {headlines}
-    """
+prompt = f"""
+Aşağıdaki {category} haber başlıklarını değerlendir. 
+Sadece **yapay zeka yazılımları, modelleri, şirket yenilikleri ve sektörel gelişmeler** hakkında olanları seç. 
+Telefon, bilgisayar, araba veya son kullanıcı cihaz haberlerini dahil etme. 
+
+Seçtiğin haberleri özgün bir şekilde tek tek aktar, 
+her biri klasik haber diliyle (giriş-gelişme-sonuç olmadan) 1-2 paragraf halinde yazılsın. 
+Başlıkların sırasını koru. 
+
+Her haberin sonunda kaynağı şu formatta belirt:
+(kaynak: {n['link']})
+
+Toplam uzunluk 600-800 kelime olsun.
+"""
+
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}]
