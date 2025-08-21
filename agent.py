@@ -6,29 +6,38 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 CATEGORIES = {
     "oyunculuk": [
         "https://www.beyazperde.com/rss/diziler-haberleri.xml",
+        "https://www.beyazperde.com/rss/filmler-haberleri.xml",
         "https://www.ranini.tv/rss"
-    ],
-    "dizifilm": [
-        "https://www.beyazperde.com/rss/diziler-haberleri.xml"
     ],
     "cekim": [
         "https://www.campaigntr.com/feed/",
-        "https://mediacat.com/feed/"
-    ],
-    "influencers": [
-        "https://www.marketingturkiye.com.tr/feed/",
-        "https://mediacat.com/feed/"
-    ],
-    "ai": [
-        "https://www.webrazzi.com/feed/",
-        "https://www.log.com.tr/feed"
+        "https://mediacat.com/feed/",
+        "https://www.marketingturkiye.com.tr/feed/"
     ],
     "reklam": [
         "https://www.campaigntr.com/feed/",
         "https://mediacat.com/feed/",
         "https://www.marketingturkiye.com.tr/feed/"
+    ],
+    "influencers": [
+        "https://sosyalmedyakulubu.com.tr/feed",
+        "https://www.marketingturkiye.com.tr/feed/"
+    ],
+    "ai": [
+        "https://www.webrazzi.com/feed/",
+        "https://www.techinside.com/feed/",
+        "https://btchaber.com/feed/",
+        "https://medium.com/feed/tag/yapay-zeka",
+            "https://www.donanimhaber.com/rss/tum/",
+    "https://www.webtekno.com/rss"
+    ],
+    "muzik": [
+        "https://www.aa.com.tr/tr/rss/kultur-sanat",
+        "https://www.ntv.com.tr/sanat.rss",
+        "https://bantmag.com/feed/"
     ]
 }
+
 
 def get_news(feeds):
     items = []
